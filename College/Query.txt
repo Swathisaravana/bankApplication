@@ -1,0 +1,20 @@
+CREATE TABLE ACCOUNT_TBL(
+    Account_Number VARCHAR2(12) PRIMARY KEY,
+    Customer_Name VARCHAR2(50),
+    Balance NUMBER(10,2)
+);
+
+INSERT INTO ACCOUNT_TBL VALUES('123456789012','Reddy',80000);
+INSERT INTO ACCOUNT_TBL VALUES('234567789012','Mahesh',0);
+INSERT INTO ACCOUNT_TBL VALUES('345678901234','Dhanu',100);
+INSERT INTO ACCOUNT_TBL VALUES('456789012345','Sam',500);
+
+CREATE TABLE TRANSFER_TBL(
+    Transaction_ID NUMBER(4) PRIMARY KEY,
+    Account_Number VARCHAR2(12),
+    Beneficiary_account_number VARCHAR2(12),
+    Transaction_Date DATE,
+    Transaction_Amount NUMBER(10,2),
+    CONSTRAINT fk_from_account FOREIGN KEY(Account_Number) REFERENCES ACCOUNT_TBL(Account_Number),
+    CONSTRAINT fk_to_account FOREIGN KEY(Beneficiary_account_number) REFERENCES ACCOUNT_TBL(Account_Number)
+);
